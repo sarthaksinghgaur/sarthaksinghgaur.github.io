@@ -33,7 +33,7 @@
     </style>
 </head>
 <body>
-    <h1 id="name"></h1>
+    <h1 id="name">Sarthak Singh Gaur</h1>
     
     <div class="section">
         <h2>Education</h2>
@@ -59,8 +59,6 @@
         fetch('/api/portfolio')
             .then(response => response.json())
             .then(data => {
-                document.getElementById('name').textContent = data.name;
-                
                 // Education
                 const education = data.education;
                 document.getElementById('education').innerHTML = `

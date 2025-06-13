@@ -1,6 +1,13 @@
-from flask import Flask, jsonify, render_template
+from fastapi import FastAPI, Request
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
+from pathlib import Path
 
-app = Flask(__name__)
+app = FastAPI(title="Sarthak Singh Gaur Portfolio")
+
+# Set up templates
+templates = Jinja2Templates(directory="templates")
 
 # Data based on your resume
 portfolio_data = {
@@ -45,15 +52,16 @@ portfolio_data = {
     ]
 }
 
-@app.route('/')
-def index():
+@app.get("/", response_class=HTMLResponse)
+async def index(request: Request):
     """Renders the landing page."""
-    return render_template('index.html')
+    return templates.TemplateResponse("index.html", {"request": request})
 
-@app.route('/api/portfolio')
-def get_portfolio_data():
+@app.get("/api/portfolio")
+async def get_portfolio_data():
     """Serves portfolio data as JSON."""
-    return jsonify(portfolio_data)
+    return portfolio_data
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
