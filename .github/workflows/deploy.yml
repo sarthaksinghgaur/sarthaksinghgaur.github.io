@@ -1,0 +1,28 @@
+# Name of the GitHub Action workflow
+name: sarthak
+
+# Trigger the workflow on a push to the main branch
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+# Define the jobs to be run
+jobs:
+  deploy:
+    # Use the latest version of Ubuntu as the runner
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the repository code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: 
+      - name: Trigger Depoyment
+        run:
+            echo Starting Deployment
+            cur -X POST "${{vars.WEBHOOK_CMD}}"
+            echo Deployment Success
