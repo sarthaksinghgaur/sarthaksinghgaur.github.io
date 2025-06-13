@@ -1,0 +1,13 @@
+[Unit]
+Description=Gunicorn instance to serve Sarthak's portfolio
+After=network.target
+
+[Service]
+User=resume
+Group=www-data
+WorkingDirectory=/home/resume/sarthaksinghgaur.github.io
+Environment="PATH=/home/resume/sarthaksinghgaur.github.io/venv/bin"
+ExecStart=/home/resume/sarthaksinghgaur.github.io/venv/bin/gunicorn -c gunicorn_config.py asgi:app
+
+[Install]
+WantedBy=multi-user.target 

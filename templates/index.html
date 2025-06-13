@@ -4,56 +4,344 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sarthak Singh Gaur - Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --text-color: #1f2937;
+            --text-light: #6b7280;
+            --bg-color: #ffffff;
+            --secondary-bg: #f8fafc;
+            --border-color: #e5e7eb;
+            --card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+        }
+
+        .container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 2rem;
         }
+
+        /* Navigation */
+        nav {
+            background: var(--bg-color);
+            box-shadow: var(--card-shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            padding: 8rem 0 4rem;
+            margin-bottom: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            transform: translateY(-3px);
+            opacity: 0.8;
+        }
+
+        /* Main Content */
+        main {
+            padding-top: 2rem;
+        }
+
         .section {
-            margin-bottom: 30px;
+            margin-bottom: 4rem;
+            padding: 2.5rem;
+            background: var(--bg-color);
+            border-radius: 1rem;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
         }
-        h1, h2 {
-            color: #333;
+
+        .section:hover {
+            transform: translateY(-2px);
         }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        h2 i {
+            font-size: 1.5rem;
+        }
+
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
         }
+
+        .skill-category {
+            background: var(--secondary-bg);
+            padding: 2rem;
+            border-radius: 1rem;
+            transition: var(--transition);
+        }
+
+        .skill-category:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--card-shadow);
+        }
+
+        .skill-category h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-category ul {
+            list-style: none;
+        }
+
+        .skill-category li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-light);
+        }
+
+        .skill-category li::before {
+            content: "•";
+            color: var(--primary-color);
+            position: absolute;
+            left: 0;
+        }
+
         .project-card {
-            border: 1px solid #ddd;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 5px;
+            background: var(--secondary-bg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 1rem;
+            transition: var(--transition);
+        }
+
+        .project-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--card-shadow);
+        }
+
+        .project-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .project-card p {
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .project-card strong {
+            color: var(--text-color);
+        }
+
+        .achievements-list {
+            list-style: none;
+        }
+
+        .achievements-list li {
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            background: var(--secondary-bg);
+            border-radius: 1rem;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .achievements-list li:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--card-shadow);
+        }
+
+        .achievements-list li i {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .hero {
+                padding: 6rem 0 3rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
         }
     </style>
 </head>
 <body>
-    <h1 id="name">Sarthak Singh Gaur</h1>
-    
-    <div class="section">
-        <h2>Education</h2>
-        <div id="education"></div>
-    </div>
+    <nav>
+        <div class="nav-container container">
+            <div class="logo">Sarthak Singh Gaur</div>
+            <div class="nav-links">
+                <a href="#education">Education</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#achievements">Achievements</a>
+            </div>
+        </div>
+    </nav>
 
-    <div class="section">
-        <h2>Skills</h2>
-        <div class="skills-grid" id="skills"></div>
-    </div>
+    <section class="hero">
+        <div class="hero-content container">
+            <h1 id="name">Sarthak Singh Gaur</h1>
+            <p>Data Science Student at IIT Madras | Full Stack Developer | Machine Learning Enthusiast</p>
+            <div class="social-links">
+                <a href="https://github.com/sarthaksinghgaur" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/sarthaksinghgaur" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:sarthaksinghgaur@gmail.com"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+    </section>
 
-    <div class="section">
-        <h2>Projects</h2>
-        <div id="projects"></div>
-    </div>
+    <main class="container">
+        <section id="education" class="section">
+            <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+            <div id="education-content"></div>
+        </section>
 
-    <div class="section">
-        <h2>Achievements</h2>
-        <ul id="achievements"></ul>
-    </div>
+        <section id="skills" class="section">
+            <h2><i class="fas fa-code"></i> Skills</h2>
+            <div class="skills-grid" id="skills-content"></div>
+        </section>
+
+        <section id="projects" class="section">
+            <h2><i class="fas fa-project-diagram"></i> Projects</h2>
+            <div id="projects-content"></div>
+        </section>
+
+        <section id="achievements" class="section">
+            <h2><i class="fas fa-trophy"></i> Achievements</h2>
+            <ul class="achievements-list" id="achievements-content"></ul>
+        </section>
+    </main>
 
     <script>
         fetch('/api/portfolio')
@@ -61,18 +349,22 @@
             .then(data => {
                 // Education
                 const education = data.education;
-                document.getElementById('education').innerHTML = `
-                    <p><strong>${education.degree}</strong><br>
-                    ${education.institution}<br>
-                    ${education.duration}</p>
+                document.getElementById('education-content').innerHTML = `
+                    <div class="project-card">
+                        <h3>${education.degree}</h3>
+                        <p>${education.institution}</p>
+                        <p><strong>${education.duration}</strong></p>
+                    </div>
                 `;
 
                 // Skills
-                const skillsDiv = document.getElementById('skills');
+                const skillsDiv = document.getElementById('skills-content');
                 Object.entries(data.skills).forEach(([category, items]) => {
                     const skillSection = document.createElement('div');
+                    skillSection.className = 'skill-category';
+                    const icon = getCategoryIcon(category);
                     skillSection.innerHTML = `
-                        <h3>${category.replace('_', ' ').toUpperCase()}</h3>
+                        <h3><i class="${icon}"></i> ${category.replace('_', ' ').toUpperCase()}</h3>
                         <ul>
                             ${items.map(skill => `<li>${skill}</li>`).join('')}
                         </ul>
@@ -81,7 +373,7 @@
                 });
 
                 // Projects
-                const projectsDiv = document.getElementById('projects');
+                const projectsDiv = document.getElementById('projects-content');
                 data.projects.forEach(project => {
                     const projectCard = document.createElement('div');
                     projectCard.className = 'project-card';
@@ -94,13 +386,23 @@
                 });
 
                 // Achievements
-                const achievementsList = document.getElementById('achievements');
+                const achievementsList = document.getElementById('achievements-content');
                 data.achievements.forEach(achievement => {
                     const li = document.createElement('li');
-                    li.textContent = achievement;
+                    li.innerHTML = `<i class="fas fa-award"></i> ${achievement}`;
                     achievementsList.appendChild(li);
                 });
             });
+
+        function getCategoryIcon(category) {
+            const icons = {
+                'languages': 'fas fa-code',
+                'technologies': 'fas fa-tools',
+                'machine_learning': 'fas fa-brain',
+                'data_analysis': 'fas fa-chart-bar'
+            };
+            return icons[category] || 'fas fa-star';
+        }
     </script>
 </body>
 </html>
