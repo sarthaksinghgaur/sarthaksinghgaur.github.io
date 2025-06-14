@@ -92,10 +92,10 @@ jobs:
           pip install -r requirements.txt
           
           # Restart the service (using sudo with limited permissions)
-          sudo systemctl restart resume-portfolio
+          sudo systemctl restart resume-portfolio.service
           
           # Check service status
-          sudo systemctl status resume-portfolio
+          sudo systemctl status resume-portfolio.service
           EOF
           
           # Make script executable
