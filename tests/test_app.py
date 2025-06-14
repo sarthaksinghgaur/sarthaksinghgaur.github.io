@@ -4,7 +4,8 @@ from app import app
 
 @pytest.fixture
 def client():
-    return TestClient(app)
+    with TestClient(app) as client:
+        yield client
 
 def test_index_page(client):
     """Test the index page loads successfully."""
