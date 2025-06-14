@@ -18,49 +18,31 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Install SSH key
-        uses: webfactory/ssh-agent@v0.8.0
-        with:
-          ssh-private-key: ${{ secrets.DEPLOY_SSH_KEY }}
-          
-      - name: Add host key
-        run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan -H ${{ secrets.DEPLOY_HOST }} >> ~/.ssh/known_hosts
-          
       - name: Deploy to server
-        run: |
-          # Create a temporary deployment script
-          cat > deploy.sh << 'EOF'
-          #!/bin/bash
-          set -e
-          
-          # Ensure we're in the correct directory
-          cd ${{ env.DEPLOY_PATH }}
-          
-          # Pull latest changes
-          git fetch origin
-          git reset --hard origin/main
-          
-          # Activate virtual environment
-          source venv/bin/activate
-          
-          # Install/update dependencies
-          pip install -r requirements.txt
-          
-          # Set proper permissions
-          sudo chown -R www-data:www-data .
-          sudo chmod -R g+rw .
-          
-          # Restart the service (using sudo with limited permissions)
-          sudo systemctl restart resume-portfolio.service
-          
-          # Check service status
-          sudo systemctl status resume-portfolio.service
-          EOF
-          
-          # Make script executable
-          chmod +x deploy.sh
-          
-          # Execute deployment script on server
-          ssh -o StrictHostKeyChecking=no ${{ env.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} "cd ${{ env.DEPLOY_PATH }} && ./deploy.sh"
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ env.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          script: |
+            cd ${{ env.DEPLOY_PATH }}
+            
+            # Pull latest changes
+            git fetch origin
+            git reset --hard origin/main
+            
+            # Activate virtual environment
+            source venv/bin/activate
+            
+            # Install/update dependencies
+            pip install -r requirements.txt
+            
+            # Set proper permissions
+            sudo chown -R www-data:www-data .
+            sudo chmod -R g+rw .
+            
+            # Restart the service (using sudo with limited permissions)
+            sudo systemctl restart resume-portfolio.service
+            
+            # Check service status
+            sudo systemctl status resume-portfolio.service
