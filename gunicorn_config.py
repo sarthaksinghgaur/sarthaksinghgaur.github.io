@@ -26,6 +26,3 @@ umask = 0
 user = None
 group = None
 tmp_upload_dir = None
-
-# ASGI specific settings
-wsgi_app = "asgi:app" 

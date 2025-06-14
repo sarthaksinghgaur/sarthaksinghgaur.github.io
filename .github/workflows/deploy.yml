@@ -27,17 +27,15 @@ jobs:
           script: |
             cd ${{ env.DEPLOY_PATH }}
             mkdir -p run        
-                 
+
             # Pull latest changes
-            git fetch origin
-            git reset --hard origin/main
+            git pull origin main
             
             # Activate virtual environment
             source venv/bin/activate
             
             # Install/update dependencies
             pip install -r requirements.txt
-            
             
             # Restart the service (using sudo with limited permissions)
             sudo systemctl restart resume-portfolio.service
