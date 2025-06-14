@@ -26,7 +26,8 @@ jobs:
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           script: |
             cd ${{ env.DEPLOY_PATH }}
-            
+            mkdir -p run        
+                 
             # Pull latest changes
             git fetch origin
             git reset --hard origin/main

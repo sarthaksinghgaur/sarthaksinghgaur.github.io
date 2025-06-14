@@ -1,7 +1,7 @@
 import multiprocessing
 
 # Server socket
-bind = "unix:/run/resume-portfolio.sock"
+bind = "unix:/var/www/sarthaksinghgaur.me/sarthaksinghgaur.github.io/run/resume-portfolio.sock"
 backlog = 2048
 
 # Worker processes
