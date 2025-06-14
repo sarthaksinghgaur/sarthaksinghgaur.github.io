@@ -1,0 +1,20 @@
+# Bandit configuration file
+# See https://bandit.readthedocs.io/en/latest/config.html
+
+# Exclude paths
+exclude_dirs: ['venv', 'tests', '.git', '__pycache__']
+
+# Skip specific tests
+skips: ['B101']  # Skip assert warnings in tests
+
+# Set severity levels
+severity: ['HIGH', 'MEDIUM']
+confidence: ['HIGH', 'MEDIUM']
+
+# Custom test configurations
+test_config:
+  # Disable specific checks
+  no_shell: True
+  no_subprocess: True
+  no_assert: True
+  no_debug: True 
