@@ -10,6 +10,7 @@ env:
   DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
   DEPLOY_USER: deployer
   DEPLOY_PATH: /var/www/sarthaksinghgaur.me/sarthaksinghgaur.github.io
+  PYTHONPATH: ${{ github.workspace }}
 
 jobs:
   test:
@@ -31,7 +32,7 @@ jobs:
           
       - name: Run tests
         run: |
-          pytest --cov=./ --cov-report=xml
+          python -m pytest --cov=./ --cov-report=xml
           
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
