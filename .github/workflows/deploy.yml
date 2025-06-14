@@ -83,13 +83,18 @@ jobs:
           cd ${{ env.DEPLOY_PATH }}
           
           # Pull latest changes
-          git pull origin main
+          git fetch origin
+          git reset --hard origin/main
           
           # Activate virtual environment
           source venv/bin/activate
           
           # Install/update dependencies
           pip install -r requirements.txt
+          
+          # Set proper permissions
+          sudo chown -R www-data:www-data .
+          sudo chmod -R g+rw .
           
           # Restart the service (using sudo with limited permissions)
           sudo systemctl restart resume-portfolio.service
@@ -101,18 +106,5 @@ jobs:
           # Make script executable
           chmod +x deploy.sh
           
-          # Copy files to server with strict permissions
-          rsync -avz --delete \
-            --exclude '.git' \
-            --exclude 'venv' \
-            --exclude '__pycache__' \
-            --exclude '*.pyc' \
-            --exclude '.env' \
-            --exclude '*.log' \
-            --exclude '*.pem' \
-            --exclude '*.key' \
-            --chmod=755 \
-            ./ ${{ env.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:${{ env.DEPLOY_PATH }}/
-            
           # Execute deployment script on server
           ssh -o StrictHostKeyChecking=no ${{ env.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} "cd ${{ env.DEPLOY_PATH }} && ./deploy.sh"
