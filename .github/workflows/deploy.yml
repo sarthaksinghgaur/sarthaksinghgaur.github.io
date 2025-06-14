@@ -37,9 +37,6 @@ jobs:
             # Install/update dependencies
             pip install -r requirements.txt
             
-            # Set proper permissions
-            sudo chown -R www-data:www-data .
-            sudo chmod -R g+rw .
             
             # Restart the service (using sudo with limited permissions)
             sudo systemctl restart resume-portfolio.service
