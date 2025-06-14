@@ -42,12 +42,18 @@
 
         /* Navigation */
         nav {
-            background: var(--bg-color);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             box-shadow: var(--card-shadow);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
+            transition: var(--transition);
+        }
+
+        nav.scrolled {
+            padding: 0.5rem 0;
         }
 
         .nav-container {
@@ -55,6 +61,12 @@
             justify-content: space-between;
             align-items: center;
             padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary-color);
         }
 
         .nav-links {
@@ -67,10 +79,22 @@
             text-decoration: none;
             font-weight: 500;
             transition: var(--transition);
+            position: relative;
         }
 
-        .nav-links a:hover {
-            color: var(--primary-color);
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         /* Hero Section */
@@ -97,6 +121,18 @@
             position: relative;
             z-index: 1;
             text-align: center;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .hero h1 {
@@ -104,6 +140,7 @@
             font-weight: 700;
             margin-bottom: 1rem;
             line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .hero p {
@@ -124,11 +161,14 @@
             color: white;
             font-size: 1.5rem;
             transition: var(--transition);
+            padding: 0.5rem;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .social-links a:hover {
             transform: translateY(-3px);
-            opacity: 0.8;
+            background: rgba(255, 255, 255, 0.2);
         }
 
         /* Main Content */
@@ -143,6 +183,13 @@
             border-radius: 1rem;
             box-shadow: var(--card-shadow);
             transition: var(--transition);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .section:hover {
@@ -175,11 +222,13 @@
             padding: 2rem;
             border-radius: 1rem;
             transition: var(--transition);
+            border: 1px solid var(--border-color);
         }
 
         .skill-category:hover {
             transform: translateY(-2px);
             box-shadow: var(--card-shadow);
+            border-color: var(--primary-color);
         }
 
         .skill-category h3 {
@@ -200,6 +249,12 @@
             padding-left: 1.5rem;
             position: relative;
             color: var(--text-light);
+            transition: var(--transition);
+        }
+
+        .skill-category li:hover {
+            color: var(--text-color);
+            transform: translateX(5px);
         }
 
         .skill-category li::before {
@@ -215,11 +270,13 @@
             margin-bottom: 2rem;
             border-radius: 1rem;
             transition: var(--transition);
+            border: 1px solid var(--border-color);
         }
 
         .project-card:hover {
             transform: translateY(-2px);
             box-shadow: var(--card-shadow);
+            border-color: var(--primary-color);
         }
 
         .project-card h3 {
@@ -250,11 +307,13 @@
             display: flex;
             align-items: center;
             gap: 1rem;
+            border: 1px solid var(--border-color);
         }
 
         .achievements-list li:hover {
             transform: translateY(-2px);
             box-shadow: var(--card-shadow);
+            border-color: var(--primary-color);
         }
 
         .achievements-list li i {
@@ -344,6 +403,31 @@
     </main>
 
     <script>
+        // Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
         fetch('/api/portfolio')
             .then(response => response.json())
             .then(data => {
