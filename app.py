@@ -8,6 +8,7 @@ app = FastAPI(title="Sarthak Singh Gaur Portfolio")
 
 # Set up templates
 templates = Jinja2Templates(directory="templates")
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Data based on your resume
 portfolio_data = {
